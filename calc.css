@@ -28,6 +28,9 @@ body {
 .button_defaults:hover {
     transform: scale(0.88);
 }
+.button_defaults:active {
+    opacity: 0.5;
+}
 .operator_defaults {
     background-color: rgba(255,255,255, 0.65);
     backdrop-filter: blur(3px);
