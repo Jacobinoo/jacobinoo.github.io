@@ -1,2 +1,1 @@
-# jacobinoo.github.io
-Calculator
+# Calculator
