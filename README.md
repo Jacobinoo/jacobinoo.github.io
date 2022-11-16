@@ -1,2 +1,2 @@
 # Calculator
-[Click here to open](https://www.jacobinoo.github.io)
+[Click here to open](https://jacobinoo.github.io/)
