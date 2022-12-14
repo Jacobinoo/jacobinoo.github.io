@@ -85,15 +85,16 @@ h1 {
 .disabled {
     opacity: 0;
 }
-.footer {
-    margin-top: -50px;
-    margin-right: 10px;
-    text-align: right;
+.link {
+    position: absolute;
+    right: 20px;
+    bottom: 60px;
+    color: white;
+    text-decoration: none;
     font-family: 'Roboto', 'Arial', 'Segoe UI', 'sans-serif';
 }
-.footer:hover {
+.link:hover {
     color: gray;
-    cursor: pointer;
 }
 #info {
     flex-direction: column;
