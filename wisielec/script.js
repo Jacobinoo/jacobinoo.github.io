@@ -10,8 +10,6 @@ wordSplit.forEach(_ => {
 });
 
 document.querySelector("body").addEventListener("click", e => {
-    //Github link
-    if(e.target.className = "footer") window.open('https://github.com/Jacobinoo', '_blank');
     if(e.target.id == "try-again-btn") {
         reset()
     }
