@@ -1,5 +1,5 @@
 const words = [
-    "okno", "kiełbasa", "szkoła", "banan", "naleśniki", "poziomica", "komputer", "monitor", "słownik", "pies", "kamera", "drukarka", "jajko", "kura", "lista", "słuchawki", "telefon", "ręka", "krzyż"
+    "okno", "kiełbasa", "szkoła", "banan", "naleśniki", "poziomica", "komputer", "monitor", "słownik", "pies", "kamera", "drukarka", "jajko", "kura", "lista", "słuchawki", "telefon", "ręka", "krzyż", "taylor", "gżegżółka", "dżem"
 ]
 let randomWord = words[Math.round((words.length - 1) * Math.random())]
 let wordSplit = randomWord.split("");
