@@ -57,8 +57,7 @@ nav {
 .row-wrapper {
     display: flex;
     flex-flow: row nowrap;
-    gap: 2px;
-    justify-content: center;
+    gap: 20px;
     align-items: center;
 }
 .language-switch {
@@ -198,6 +197,15 @@ section {
     align-self: flex-start;
     text-decoration: none;
     color: black;
+}
+.secondary {
+    background: none;
+    color: white;
+    border: 1px solid white;
+    box-sizing: border-box;
+}
+.icon-btn > img {
+    width: 44px;
 }
 
 .text-big {
