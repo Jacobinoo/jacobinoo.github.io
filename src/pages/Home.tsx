@@ -125,7 +125,7 @@ export const Home: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-black font-mono text-sm selection:bg-black selection:text-white p-6 md:p-12 lg:p-24 max-w-4xl mx-auto rounded-xl">
+    <div className="min-h-screen bg-white text-black font-mono text-sm selection:bg-black selection:text-white p-6 md:p-12 lg:p-24 max-w-4xl mx-auto rounded-xl border border-gray-300">
       
       <header className="mb-24 flex justify-between items-start">
         <div className="space-y-1.5">
