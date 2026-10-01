@@ -280,7 +280,7 @@ export const Home: React.FC = () => {
 
                 <div className="flex flex-wrap items-center gap-4">
                   <a 
-                    href="https://quartzapp.top?utm_source=portfolio&utm_medium=link"
+                    href="https://quartzapp.top?utm_source=portfolio&utm_medium=link&utm_campaign=demo"
                     target="_blank" 
                     rel="noopener"
                     className="group inline-flex items-center justify-center bg-black text-white px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors shadow-sm"
