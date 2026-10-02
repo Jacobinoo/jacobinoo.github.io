@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import memojiImg from '../assets/memoji.png';
-import showcaseVideo from '../assets/Showcase.mov';
+import showcaseVideo from '../assets/Showcase.mp4';
 
 export const Home: React.FC = () => {
   const [copied, setCopied] = useState(false);
