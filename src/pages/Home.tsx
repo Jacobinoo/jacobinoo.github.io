@@ -288,7 +288,7 @@ export const Home: React.FC = () => {
                     Live Demo <span className="ml-1.5 transition-transform group-hover:translate-x-1">&rarr;</span>
                   </a>
                   <a 
-                    href="https://github.com/jacobinoo/quartz-drive"
+                    href="https://github.com/jacobinoo/quartz-drive?utm_source=portfolio&utm_medium=link&utm_campaign=202610"
                     target="_blank" 
                     rel="noreferrer"
                     className="group inline-flex items-center justify-center border border-gray-300 text-black px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-gray-50 hover:border-black transition-colors"
@@ -365,7 +365,7 @@ export const Home: React.FC = () => {
               </a>
 
               <a
-                href="https://github.com/jacobinoo"
+                href="https://github.com/jacobinoo?utm_source=portfolio&utm_medium=link&utm_campaign=202610"
                 target="_blank" 
                 rel="noreferrer" 
                 className="border border-black p-5 flex flex-col justify-between space-y-4 hover:bg-gray-50 transition-colors group"
@@ -404,7 +404,7 @@ export const Home: React.FC = () => {
         <div>&copy; {new Date().getFullYear()} Jacobinoo</div>
         <div className="flex space-x-6 uppercase tracking-widest text-[11px]">
           <a href="mailto:it_bjacob@icloud.com" className="text-blue-600 hover:text-blue-800 hover:underline underline-offset-4">Email</a>
-          <a href="https://github.com/jacobinoo" target="_blank" rel="noreferrer" className="text-blue-600 hover:text-blue-800 hover:underline underline-offset-4">GitHub</a>
+          <a href="https://github.com/jacobinoo?utm_source=portfolio&utm_medium=link&utm_campaign=202610" target="_blank" rel="noreferrer" className="text-blue-600 hover:text-blue-800 hover:underline underline-offset-4">GitHub</a>
           <a href="https://linkedin.com/in/banjacob" target="_blank" rel="noreferrer" className="text-blue-600 hover:text-blue-800 hover:underline underline-offset-4">LinkedIn</a>
         </div>
       </footer>
