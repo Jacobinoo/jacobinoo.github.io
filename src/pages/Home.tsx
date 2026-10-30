@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import memojiImg from '../assets/memoji.png';
+import githubImg from '../assets/github.png'
 import showcaseVideo from '../assets/Showcase.mp4';
 
 export const Home: React.FC = () => {
@@ -93,51 +94,56 @@ export const Home: React.FC = () => {
     {
       label: 'LANGUAGES & RUNTIMES',
       skills: [
-        { name: 'JavaScript', desc: 'Interactive web' },
-        { name: 'TypeScript', desc: 'Type-safe code' },
-        { name: 'Golang (Go)', desc: 'High-throughput services' },
-        { name: 'Node.js', desc: 'Best for I/O bound apps' },
-        { name: 'Swift', desc: 'Development for Apple systems'},
+        'JS & TS',
+        'Golang',
+        'Node.js',
+        'Swift',
       ],
     },
     {
-      label: 'FRONTEND & DESIGN CRAFT',
+      label: 'FRONTEND',
       skills: [
-        { name: 'HTML & CSS', desc: 'Designing & styling websites' },
-        { name: 'Tailwind CSS', desc: 'Easier styling' },
-        { name: 'React', desc: 'Modern JS library for UI' },
-        { name: 'Next.js', desc: 'Performance & SEO out of the box' },
-        { name: 'Angular', desc: 'Component-based SPA framework' },
-        { name: 'Swift UI', desc: 'UI framework for Apple platforms' },
+        'HTML & CSS',
+        'Tailwind CSS',
+        'React',
+        'Next.js',
       ],
     },
     {
       label: 'INFRASTRUCTURE & DEVOPS',
       skills: [
-        { name: 'Git & GitHub', desc: 'Version control & collaboration' },
-        { name: 'GitOps', desc: 'Infra with Git as source of truth' },
-        { name: 'Docker', desc: 'Containerization' },
-        { name: 'AWS S3 API', desc: 'Object storage' },
-        { name: 'PostgreSQL', desc: 'Relational data modeling' },
-        { name: 'Redis', desc: 'In-memory caching & ephemeral state' },
+          'Kubernetes (kind/k3s)',
+          'Git & GitHub',
+          'CI/CD (Github Actions)',
+          'Docker',
+          'Linux',
+          'Traefik Reverse Proxy',
+          'S3-compatible storage (Backblaze B2)',
+          'PostgreSQL',
+          'Valkey',
       ],
     },
+    {
+      label: 'CURRENTLY LEARNING',
+      skills: [
+          'Terraform',
+      ]
+    }
   ];
 
   return (
     <div className="min-h-screen bg-white text-black font-mono text-sm selection:bg-black selection:text-white p-6 md:p-12 lg:p-24 max-w-4xl mx-auto rounded-xl border border-gray-300">
-      
+
       <header className="mb-24 flex justify-between items-start">
         <div className="space-y-1.5">
           <div className="flex flex-wrap items-center gap-2.5">
-            <h1 className="font-bold tracking-tight">JACOBINOO / FULL-STACK DEVELOPER</h1>
+            <h1 className="font-bold tracking-tight">JACOBINOO / DEVOPS & BACKEND DEVELOPER</h1>
             <a 
               href="#contact"
               onClick={scrollToContact}
               className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-emerald-500/30 bg-emerald-50 text-[10px] text-emerald-700 font-semibold tracking-wide hover:bg-emerald-100/80 hover:border-emerald-500/50 hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-xs"
               title="Jump to Get in Touch"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               OPEN TO WORK
             </a>
           </div>
@@ -172,14 +178,126 @@ export const Home: React.FC = () => {
           <div className="md:col-span-8 space-y-4 leading-relaxed max-w-xl">
             <h2 className="uppercase tracking-widest text-xs text-gray-400 pb-2 border-b border-gray-100 font-semibold">About</h2>
             <p>
-              I am a passionate developer and computer science student, focused on creating <mark className="bg-yellow-200 px-1 rounded-sm text-black">robust, secure, and intuitive applications</mark>. My journey involves deep dives into both frontend aesthetics and backend architecture.
+              Computer science student (part-time), building backend and infrastructure with Go. Built Quartz Drive, <mark className="bg-yellow-200 px-1 rounded-sm text-black">an end-to-end encrypted cloud storage service</mark>, covering authentication, encrypted uploads, and zero-downtime deployments that evolved into a Kubernetes (k3s) cluster on Oracle Cloud.
             </p>
             <p>
-              I specialize in building <mark className="bg-yellow-200 px-1 rounded-sm text-black">high-performance digital experiences</mark> and scalable cloud architecture. When I'm not coding, I'm exploring new technologies, refining my understanding of system design, or dreaming about the next big thing.
+              Currently looking for a junior DevOps or backend role.
             </p>
-            <p>
-              I don't just write code; I build the things I wish existed.
-            </p>
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <div className="flex justify-between items-baseline pb-2 border-b border-gray-200">
+            <h2 className="uppercase tracking-widest text-xs text-gray-500 font-semibold">Selected Work</h2>
+            <span className="text-xs text-gray-400 uppercase">[Built with passion and lots of coffee]</span>
+          </div>
+
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
+              <h3 className="text-lg font-bold">Quartz Drive &mdash; E2EE Cloud Storage</h3>
+            </div>
+
+            <div className="border border-black bg-zinc-950 overflow-hidden relative shadow-sm group">
+              <div className="flex items-center justify-between px-3 py-2 bg-zinc-900 border-b border-zinc-800 text-[11px] text-zinc-400">
+                <div className="flex items-center space-x-2">
+                  <span className={`w-2 h-2 rounded-full ${isPlaying ? 'bg-emerald-400' : 'bg-zinc-500'}`} />
+                  <span className="font-mono text-zinc-300">
+                    Showcase.mp4 {isPlaying ? '[PLAYING]' : '[PAUSED]'}
+                  </span>
+                </div>
+
+                <button
+                    type="button"
+                    onClick={togglePlayPause}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-white text-black hover:bg-zinc-200 text-[11px] font-bold tracking-tight transition-all cursor-pointer"
+                >
+                  {isPlaying ? (
+                      <>
+                        <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                        <span>Pause</span>
+                      </>
+                  ) : (
+                      <>
+                        <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        <span>Play</span>
+                      </>
+                  )}
+                </button>
+              </div>
+
+              <div className="relative cursor-pointer" onClick={togglePlayPause}>
+                <video
+                    ref={videoRef}
+                    src={showcaseVideo}
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    onPlay={() => setIsPlaying(true)}
+                    onPause={() => setIsPlaying(false)}
+                    className="w-full h-auto object-cover bg-black select-none block"
+                />
+
+                {!isPlaying && (
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center backdrop-blur-[1px] transition-all">
+                      <div className="w-14 h-14 rounded-full bg-white/90 text-black flex items-center justify-center shadow-2xl">
+                        <svg className="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24">
+                          <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                      </div>
+                    </div>
+                )}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pt-2">
+              <div className="md:col-span-8 space-y-6">
+                <p className="leading-relaxed text-gray-600">
+                  An <mark className="bg-yellow-200 px-1 rounded-sm text-black">end-to-end encrypted</mark> cloud storage system. Built with performance and privacy in mind, <mark className="bg-yellow-200 px-1 rounded-sm text-black">the server never sees passwords or plaintext file contents.</mark> Open-sourced.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-4">
+                  <a
+                      href="https://quartzapp.top?utm_source=portfolio&utm_medium=link&utm_campaign=demo"
+                      target="_blank"
+                      rel="noopener"
+                      className="group inline-flex items-center justify-center bg-black text-white px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors shadow-sm"
+                  >
+                    Live Demo <span className="ml-1.5 transition-transform group-hover:translate-x-1">&rarr;</span>
+                  </a>
+                  <a
+                      href="/quartz-drive-case-study"
+                      rel="noreferrer"
+                      className="group inline-flex items-center justify-center border border-gray-300 text-black px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-gray-50 hover:border-black transition-colors"
+                  >
+                    Case Study <span className="ml-1.5 transition-transform group-hover:translate-x-1">&rarr;</span>
+                  </a>
+                  <a
+                      href="https://github.com/jacobinoo/quartz-drive?utm_source=portfolio&utm_medium=link&utm_campaign=202610"
+                      target="_blank"
+                      rel="noreferrer"
+                  >
+                    <img
+                        src={githubImg}
+                        alt="Github Logo"
+                        className="w-8 h-8 max-w-8 max-h-8 object-contain hover:opacity-70"
+                    />
+                  </a>
+                </div>
+              </div>
+              <div className="md:col-span-4 text-xs text-gray-500 uppercase flex flex-col space-y-1">
+                <span>Golang</span>
+                <span>Kubernetes (k3s)</span>
+                <span>Docker</span>
+                <span>GitHub Actions</span>
+                <span>Valkey</span>
+                <span>PostgreSQL</span>
+                <span>Cloudflare</span>
+                <span>Oracle Cloud & GCP (Linux)</span>
+                <span>Backblaze B2 Cloud</span>
+                <span>Next.js</span>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -198,113 +316,12 @@ export const Home: React.FC = () => {
                 <ul className="space-y-2">
                   {group.skills.map((skill, sIdx) => (
                     <li key={sIdx} className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 py-1 border-b border-dotted border-gray-100 text-xs">
-                      <span className="font-semibold text-black">{skill.name}</span>
-                      <span className="text-gray-500 text-[11px] sm:text-right">{skill.desc}</span>
+                      <span className="font-semibold text-black">{skill}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <div className="flex justify-between items-baseline pb-2 border-b border-gray-200">
-            <h2 className="uppercase tracking-widest text-xs text-gray-500 font-semibold">Selected Work</h2>
-            <span className="text-xs text-gray-400 uppercase">[Built with passion and lots of coffee]</span>
-          </div>
-          
-          <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
-              <h3 className="text-lg font-bold">Quartz Drive &mdash; E2EE Cloud Storage</h3>
-            </div>
-            
-            <div className="border border-black bg-zinc-950 overflow-hidden relative shadow-sm group">
-              <div className="flex items-center justify-between px-3 py-2 bg-zinc-900 border-b border-zinc-800 text-[11px] text-zinc-400">
-                <div className="flex items-center space-x-2">
-                  <span className={`w-2 h-2 rounded-full ${isPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-500'}`} />
-                  <span className="font-mono text-zinc-300">
-                    Showcase.mp4 {isPlaying ? '[PLAYING]' : '[PAUSED]'}
-                  </span>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={togglePlayPause}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-white text-black hover:bg-zinc-200 text-[11px] font-bold tracking-tight transition-all cursor-pointer"
-                >
-                  {isPlaying ? (
-                    <>
-                      <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-                      <span>Pause</span>
-                    </>
-                  ) : (
-                    <>
-                      <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                      <span>Play</span>
-                    </>
-                  )}
-                </button>
-              </div>
-
-              <div className="relative cursor-pointer" onClick={togglePlayPause}>
-                <video 
-                  ref={videoRef}
-                  src={showcaseVideo}
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  onPlay={() => setIsPlaying(true)}
-                  onPause={() => setIsPlaying(false)}
-                  className="w-full h-auto object-cover bg-black select-none block"
-                />
-
-                {!isPlaying && (
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center backdrop-blur-[1px] transition-all">
-                    <div className="w-14 h-14 rounded-full bg-white/90 text-black flex items-center justify-center shadow-2xl">
-                      <svg className="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24">
-                        <polygon points="5 3 19 12 5 21 5 3" />
-                      </svg>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pt-2">
-              <div className="md:col-span-8 space-y-6">
-                <p className="leading-relaxed text-gray-600">
-                  A highly secure, <mark className="bg-yellow-200 px-1 rounded-sm text-black">end-to-end encrypted</mark> cloud storage system. Built with performance and privacy in mind, featuring <mark className="bg-yellow-200 px-1 rounded-sm text-black">zero-knowledge architecture</mark>. Open-sourced.
-                </p>
-
-                <div className="flex flex-wrap items-center gap-4">
-                  <a 
-                    href="https://quartzapp.top?utm_source=portfolio&utm_medium=link&utm_campaign=demo"
-                    target="_blank" 
-                    rel="noopener"
-                    className="group inline-flex items-center justify-center bg-black text-white px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors shadow-sm"
-                  >
-                    Live Demo <span className="ml-1.5 transition-transform group-hover:translate-x-1">&rarr;</span>
-                  </a>
-                  <a 
-                    href="https://github.com/jacobinoo/quartz-drive?utm_source=portfolio&utm_medium=link&utm_campaign=202610"
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="group inline-flex items-center justify-center border border-gray-300 text-black px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-gray-50 hover:border-black transition-colors"
-                  >
-                    GitHub Repo <span className="ml-1.5 transition-transform group-hover:translate-x-1">&rarr;</span>
-                  </a>
-                </div>
-              </div>
-              <div className="md:col-span-4 text-xs text-gray-500 uppercase flex flex-col space-y-1">
-                <span>Next.js</span>
-                <span>Libsodium + Web Crypto</span>
-                <span>Golang</span>
-                <span>PostgreSQL</span>
-                <span>Redis</span>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -323,7 +340,6 @@ export const Home: React.FC = () => {
                 ? 'border-emerald-600 bg-emerald-600 text-white scale-105' 
                 : 'border-emerald-500/30 bg-emerald-50 text-emerald-700'
             }`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${isContactHighlighted ? 'bg-white' : 'bg-emerald-500'} animate-pulse`} />
               OPEN TO WORK
             </span>
           </div>
@@ -359,7 +375,7 @@ export const Home: React.FC = () => {
                   </div>
                 </div>
                 <div className="text-xs pt-2 border-t border-gray-200 flex justify-between items-center">
-                  <span className="text-gray-500">Send an email</span>
+                  <span className="text-gray-500">Send Email</span>
                   <span className="font-bold text-blue-600 group-hover:text-blue-800 group-hover:translate-x-0.5 transition-transform">&rarr;</span>
                 </div>
               </a>
