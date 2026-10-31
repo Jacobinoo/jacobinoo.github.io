@@ -115,7 +115,7 @@ export const Home: React.FC = () => {
       skills: [
           'Kubernetes (kind/k3s)',
           'Git & GitHub',
-          'CI/CD (Github Actions)',
+          'CI/CD (GitHub Actions)',
           'Docker',
           'Linux',
           'Traefik Reverse Proxy',
@@ -254,7 +254,7 @@ export const Home: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pt-2">
               <div className="md:col-span-8 space-y-6">
                 <p className="leading-relaxed text-gray-600">
-                  An <mark className="bg-yellow-200 px-1 rounded-sm text-black">end-to-end encrypted</mark> cloud storage system. Built with performance and privacy in mind, <mark className="bg-yellow-200 px-1 rounded-sm text-black">the server never sees passwords or plaintext file contents.</mark> Open-sourced.
+                  An <mark className="bg-yellow-200 px-1 rounded-sm text-black">end-to-end encrypted</mark> cloud storage system. Built with privacy in mind, <mark className="bg-yellow-200 px-1 rounded-sm text-black">the server never sees passwords or plaintext file contents.</mark> Open-sourced.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4">
