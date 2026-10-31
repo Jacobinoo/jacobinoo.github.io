@@ -118,6 +118,7 @@ export const Home: React.FC = () => {
           'CI/CD (GitHub Actions)',
           'Docker',
           'Linux',
+          'GCP Compute & OCI Compute',
           'Traefik Reverse Proxy',
           'S3-compatible storage (Backblaze B2)',
           'PostgreSQL',
