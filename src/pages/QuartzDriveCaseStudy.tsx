@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import quartzArchitectureSvg from '../assets/quartz_architecture.svg';
 
 export const QuartzDriveCaseStudy: React.FC = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <article className="min-h-screen bg-white text-zinc-900 font-mono text-sm leading-relaxed p-6 md:p-12 lg:p-24 max-w-4xl mx-auto rounded-xl border border-gray-300 selection:bg-zinc-900 selection:text-white my-4 shadow-xs">
 
