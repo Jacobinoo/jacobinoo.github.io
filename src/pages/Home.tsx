@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import memojiImg from '../assets/memoji.png';
 import githubImg from '../assets/github.png'
 import showcaseVideo from '../assets/Showcase.mp4';
@@ -265,13 +266,12 @@ export const Home: React.FC = () => {
                   >
                     Live Demo <span className="ml-1.5 transition-transform group-hover:translate-x-1">&rarr;</span>
                   </a>
-                  <a
-                      href="/quartz-drive-case-study"
-                      rel="noreferrer"
+                  <Link
+                      to="/quartz-drive-case-study"
                       className="group inline-flex items-center justify-center border border-gray-300 text-black px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-gray-50 hover:border-black transition-colors"
                   >
                     Case Study <span className="ml-1.5 transition-transform group-hover:translate-x-1">&rarr;</span>
-                  </a>
+                  </Link>
                   <a
                       href="https://github.com/jacobinoo/quartz-drive?utm_source=portfolio&utm_medium=link&utm_campaign=202610"
                       target="_blank"
