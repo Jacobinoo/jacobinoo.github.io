@@ -45,7 +45,7 @@ export const QuartzDriveCaseStudy: React.FC = () => {
         </div>
 
         <div className="text-xs text-zinc-500 pt-2 border-t border-zinc-100">
-          <strong>Stack:</strong> Go, Kubernetes (k3s), Docker, PostgreSQL, Valkey, Backblaze B2, Cloudflare Tunnel, Next.js, OPAQUE
+          <strong>Stack:</strong> Go, Kubernetes (k3s), GitHub Actions, Docker, PostgreSQL, Valkey, Backblaze B2, Cloudflare Tunnel, Next.js, OPAQUE
         </div>
       </header>
 
@@ -131,7 +131,7 @@ export const QuartzDriveCaseStudy: React.FC = () => {
 
         <div className="space-y-1.5">
           <h3 className="font-semibold text-black">
-            3. Custom Go Deployer (qdeploy) for Lightweight Zero-Downtime Rollouts
+            3. Custom Go Deployer (qdeploy) for Lightweight Zero-Downtime Rollouts (Original Compose deployment path, since replaced by k3s)
           </h3>
           <p className="text-zinc-700">
             <strong>Why:</strong> To understand container lifecycle mechanics from the ground up, I engineered <code className="bg-zinc-100 px-1 py-0.5 rounded">qdeploy</code> in Go. It orchestrates blue/green deployments on a single host using Docker Compose scaling (<code className="bg-zinc-100 px-1 py-0.5 rounded">--scale service=2 --no-recreate</code>), atomic PID lockfiles, and active container health inspection.
@@ -167,7 +167,7 @@ export const QuartzDriveCaseStudy: React.FC = () => {
             <strong>Why:</strong> In privacy-preserving authentication protocols, returning an immediate 404 for unknown accounts leaks user registration status. The backend generates a deterministic fake OPAQUE registration record and completes the cryptographic challenge identically for unregistered emails, making user enumeration much harder.
           </p>
           <p className="text-zinc-600 text-xs">
-            <strong>Alternative rejected:</strong> Generic login error messages that still leak user existence through subtle database query timing discrepancies.
+            <strong>Alternative rejected:</strong> Returning only a generic error message, which still leaks account existence through response timing.
           </p>
           <p className="text-zinc-600 text-xs">
             <strong>Tradeoff:</strong> Non-existent users consume equal server cryptographic CPU cycles during login handshakes, requiring Valkey IP-based rate limiting and Cloudflare Turnstile to prevent CPU exhaustion attacks.
@@ -273,9 +273,9 @@ export const QuartzDriveCaseStudy: React.FC = () => {
         </p>
 
         <ul className="list-disc list-inside space-y-1.5 text-zinc-700 text-xs pl-1">
-          <li><strong>GitHub Actions:</strong> Pull requests trigger automated Go unit testing and build checking. Merges to master build cached multi-stage Docker images (<code className="bg-zinc-100 px-1 py-0.5 rounded">~2min</code> build time) tagged with commit SHAs.</li>
+          <li><strong>GitHub Actions & Native ARM64 Builds:</strong> Pull requests trigger automated Go unit tests on hosted runners. Merges to master build cached multi-stage Docker images on native ARM64 runners tagged with immutable commit SHAs, bypassing slow QEMU cross-architecture emulation.</li>
           <li><strong>Zero-Inbound Attack Surface:</strong> All traffic routes through an in-cluster <code className="bg-zinc-100 px-1 py-0.5 rounded">cloudflared</code> Deployment via an outbound-only encrypted tunnel. Public ports 22, 80, 443, and 6443 remain completely closed in Oracle Cloud security lists; host SSH management is routed privately through a Cloudflare One (Zero Trust / WARP) private mesh network with zero open inbound ports.</li>
-          <li><strong>Cluster Rollouts:</strong> On the live k3s cluster, releases update via <code className="bg-zinc-100 px-1 py-0.5 rounded">kubectl set image deployment/quartz-api quartz-api=&lt;image&gt;:sha-&lt;commit&gt;</code>, pinning the immutable SHA tag and triggering a native rolling update. Kubernetes terminates old pods only after new replicas pass the HTTP <code className="bg-zinc-100 px-1 py-0.5 rounded">/up</code> readiness probe. A continuous curl request loop confirmed zero dropped requests during active rollouts.</li>
+          <li><strong>In-Cluster CI/CD & Automated Rollbacks:</strong> CI builds a SHA-tagged ARM64 image, then an in-cluster, outbound-only GitHub Actions runner pod executes <code className="bg-zinc-100 px-1 py-0.5 rounded">kubectl set image</code> and monitors <code className="bg-zinc-100 px-1 py-0.5 rounded">rollout status</code>, with automated <code className="bg-zinc-100 px-1 py-0.5 rounded">rollout undo</code> fallback on readiness probe failure. Cluster risk is bounded via strict RBAC (scoped strictly to <code className="bg-zinc-100 px-1 py-0.5 rounded">quartz-api</code> deployments and replicasets), fork-PR restrictions, and NetworkPolicy egress isolation. Kubernetes terminates old pods only after new replicas pass the HTTP <code className="bg-zinc-100 px-1 py-0.5 rounded">/up</code> readiness probe, and a continuous curl request loop confirmed zero dropped requests during active rollouts.</li>
           <li><strong>Observability & Structured Logging:</strong> JSON logging using Go's <code className="bg-zinc-100 px-1 py-0.5 rounded">slog</code> package. Every incoming request receives a unique <code className="bg-zinc-100 px-1 py-0.5 rounded">X-Request-ID</code> propagated across Go handlers, and Sentry internal server error captures.</li>
         </ul>
 
@@ -319,7 +319,7 @@ export const QuartzDriveCaseStudy: React.FC = () => {
             1. Size Validation and Presigned POST Incompatibility on Backblaze B2 S3 API
           </h3>
           <p className="text-zinc-700 text-xs">
-            <strong>Problem:</strong> Standard AWS S3 buckets allow for presigned POST policies, which would have allowed me for strict chunk size validation. Backblaze B2 S3 API doesn't support them.
+            <strong>Problem:</strong> Standard AWS S3 buckets allow for presigned POST policies, which would have let me enforce strict chunk size validation. Backblaze B2 S3 API doesn't support them.
           </p>
           <p className="text-zinc-700 text-xs">
             <strong>Solution:</strong> Used presigned <code className="bg-zinc-100 px-1 py-0.5 rounded">PUT</code> requests signed with MinIO's <code className="bg-zinc-100 px-1 py-0.5 rounded">PresignHeader</code>. The client pre-computes strict <code className="bg-zinc-100 px-1 py-0.5 rounded">Content-Length</code> and <code className="bg-zinc-100 px-1 py-0.5 rounded">x-amz-checksum-sha256</code> headers before requesting the URL. I confirmed experimentally that B2 returns HTTP 403 or signature mismatch if the uploaded payload size deviates from the pre-signed Content-Length by even a single byte.
@@ -328,25 +328,25 @@ export const QuartzDriveCaseStudy: React.FC = () => {
 
         <div className="space-y-1">
           <h3 className="font-semibold text-black text-sm">
-            2. Sourcing .env in SSH Scripts Breaking Under Special Characters
-          </h3>
-          <p className="text-zinc-700 text-xs">
-            <strong>Problem:</strong> The original shell deployment ran <code className="bg-zinc-100 px-1 py-0.5 rounded">set -a && source .env.production</code> over SSH from CI. Values containing unquoted symbols, spaces, or hashes broke bash syntax under <code className="bg-zinc-100 px-1 py-0.5 rounded">set -e</code>, aborting deploys or leaving child processes with missing environment variables.
-          </p>
-          <p className="text-zinc-700 text-xs">
-            <strong>Solution:</strong> In <code className="bg-zinc-100 px-1 py-0.5 rounded">qdeploy</code>, I implemented a custom parser that reads the env file line-by-line, trims whitespace, strips single/double quotes, and sets variables directly on the process via <code className="bg-zinc-100 px-1 py-0.5 rounded">os.Setenv</code>. All spawned child commands (<code className="bg-zinc-100 px-1 py-0.5 rounded">docker compose</code>) inherit the variables cleanly without shell sourcing discrepancies.
-          </p>
-        </div>
-
-        <div className="space-y-1">
-          <h3 className="font-semibold text-black text-sm">
-            3. Reliably Identifying the New Container in Blue/Green Deploys
+            2. Reliably Identifying the New Container in Blue/Green Deploys
           </h3>
           <p className="text-zinc-700 text-xs">
             <strong>Problem:</strong> The original bash script found the new container by grepping container IDs after scaling to two replicas. It was fragile, especially on a first deploy when no old container existed.
           </p>
           <p className="text-zinc-700 text-xs">
             <strong>Solution:</strong> <code className="bg-zinc-100 px-1 py-0.5 rounded">qdeploy</code> snapshots the running container IDs before scaling up and takes the set difference afterward. Old containers are stopped only after the new one is healthy. On failure it logs the container's last lines, removes the new container, and restores the scale.
+          </p>
+        </div>
+
+        <div className="space-y-1">
+          <h3 className="font-semibold text-black text-sm">
+            3. Tooling and Security Isolation for the In-Cluster CI Runner
+          </h3>
+          <p className="text-zinc-700 text-xs">
+            <strong>Problem:</strong> Running a GitHub Actions runner inside the cluster kept the Kubernetes API server completely private, but introduced two challenges: the official runner image lacked <code className="bg-zinc-100 px-1 py-0.5 rounded">kubectl</code>, and running CI jobs inside the cluster meant a compromised workflow could potentially access private databases (PostgreSQL/Valkey).
+          </p>
+          <p className="text-zinc-700 text-xs">
+            <strong>Solution:</strong> Solved the tooling gap with an <code className="bg-zinc-100 px-1 py-0.5 rounded">alpine</code> init container that downloads and checksum-verifies <code className="bg-zinc-100 px-1 py-0.5 rounded">kubectl</code> into a shared volume before the runner starts. Contained cluster risk using least-privilege RBAC (the runner can only patch and inspect <code className="bg-zinc-100 px-1 py-0.5 rounded">quartz-api</code>), an egress <code className="bg-zinc-100 px-1 py-0.5 rounded">NetworkPolicy</code> that blocks connections to internal databases, ephemeral pod recycling after every job, and restricting fork PR workflows in GitHub.
           </p>
         </div>
       </section>
@@ -356,8 +356,9 @@ export const QuartzDriveCaseStudy: React.FC = () => {
           6. What I'd Do Next
         </h2>
         <ul className="list-disc list-inside space-y-1.5 text-zinc-700 text-xs pl-1">
+          <li><strong>GitOps Continuous Delivery (Argo CD):</strong> Transition from in-cluster push runners to declarative pull-based GitOps, where CI only pushes the SHA-tagged container image and an in-cluster controller reconciles state, eliminating runner pod execution privileges altogether.</li>
           <li><strong>Automated Database Backups:</strong> Implement scheduled CronJobs running <code className="bg-zinc-100 px-1 py-0.5 rounded">pg_dump</code> with client-side encryption streamed directly to Backblaze B2, complete with an automated restore drill (mitigating the single-instance Postgres operational gap).</li>
-          <li><strong>Infrastructure as Code (Terraform):</strong> Codify Oracle Cloud infrastructure (VCN, compute instances, security lists) and Cloudflare DNS/Tunnel configurations into declarative Terraform modules.</li>
+          <li><strong>Infrastructure as Code (Terraform):</strong> Codify Oracle Cloud infrastructure (VCN, compute instances, security lists) and Cloudflare Tunnel configurations into declarative Terraform modules.</li>
           <li><strong>Enhanced Rate Limiting:</strong> Implement distributed sliding-window token buckets in Valkey to throttle abusive requests for download URL generation.</li>
           <li><strong>Expanded Test Coverage:</strong> Add more end-to-end integration tests and k6 flows.</li>
           <li><strong>Cluster Monitoring & Metrics:</strong> Deploy Prometheus and Grafana into the Kubernetes cluster to collect real-time request rates, and more.</li>
